@@ -5,6 +5,8 @@ const app = express()
 app.use(express.static('public'))
 app.use(express.json())
 
+const APP_PORT = 3005
+
 // pega pack de cartas aleatorias
 app.get('/api/pack', async (req, res) => {
   try {
@@ -67,7 +69,7 @@ app.get('/api/pack', async (req, res) => {
 
     // retorna 4 cartas
     res.json({ cards: tmp.slice(0, 4) })
-  } catch(e) {
+  } catch (e) {
     console.log(e)
     res.status(500).json({ error: 'erro ao buscar personagens' })
   }
@@ -113,7 +115,7 @@ app.get('/api/spells', async (req, res) => {
     }
 
     res.json({ spells: tmp.slice(0, 20) })
-  } catch(e) {
+  } catch (e) {
     console.log(e)
     res.status(500).json({ error: 'erro ao buscar feiticos' })
   }
@@ -179,12 +181,12 @@ app.post('/api/cpu-deck', async (req, res) => {
     }
 
     res.json({ deck: tmp.slice(0, 2) })
-  } catch(e) {
+  } catch (e) {
     console.log(e)
     res.status(500).json({ error: 'erro ao montar deck cpu' })
   }
 })
 
-app.listen(3000, () => {
-  console.log('rodando na porta 3000')
+app.listen(APP_PORT, () => {
+  console.log(`Rodando na porta ${APP_PORT}`)
 })
