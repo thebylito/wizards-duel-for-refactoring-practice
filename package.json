@@ -3,11 +3,11 @@
   "version": "2.0.0",
   "description": "Card game Harry Potter com draft e batalha por feitiços",
   "main": "index.js",
+  "type": "module",
   "engines": {
     "node": "^24.11"
   },
   "scripts": {
-    "start": "node index.js",
     "dev": "node --watch src/index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
