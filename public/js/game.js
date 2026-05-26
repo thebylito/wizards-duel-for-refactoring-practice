@@ -3,6 +3,10 @@
 const PLAYER_SPELLS_COUNT = 5;
 const SPELL_ANIMATION_DELAY = 800;
 const CPU_ATTACK_DELAY = 700;
+const HIT_ANIMATION_DURATION = 600;
+const BATTLE_ANIMATION_DURATION = 500;
+const LOADING_COMPLETE_DELAY = 400;
+const LOADING_FADE_DURATION = 600;
 
 const state = {
   phase: 'loading',
@@ -81,8 +85,8 @@ async function loadGame() {
       document.getElementById('screen-loading').style.display = 'none';
       showScreen('screen-draft');
       renderPack(state.pack, state.selectedCards, toggleDraftCard);
-    }, 600);
-  }, 400);
+    }, LOADING_FADE_DURATION);
+  }, LOADING_COMPLETE_DELAY);
 }
 
 // ── Draft ─────────────────────────────────────────────
@@ -183,7 +187,7 @@ function applyPlayerSpell(spell, playerCharacter, cpuCharacter) {
     document.getElementById('battleCardP').classList.add('battling');
     setTimeout(
       () => document.getElementById('battleCardP')?.classList.remove('battling'),
-      500,
+      BATTLE_ANIMATION_DURATION,
     );
   } else {
     cpuCharacter.hp -= damage;
@@ -192,7 +196,7 @@ function applyPlayerSpell(spell, playerCharacter, cpuCharacter) {
       'win',
     );
     document.getElementById('battleCardC').classList.add('hit');
-    setTimeout(() => document.getElementById('battleCardC')?.classList.remove('hit'), 600);
+    setTimeout(() => document.getElementById('battleCardC')?.classList.remove('hit'), HIT_ANIMATION_DURATION);
   }
 }
 
@@ -212,7 +216,7 @@ function applyCpuSpell(cpuCharacter, playerCharacter) {
     document.getElementById('battleCardC')?.classList.add('battling');
     setTimeout(
       () => document.getElementById('battleCardC')?.classList.remove('battling'),
-      500,
+      BATTLE_ANIMATION_DURATION,
     );
   } else {
     playerCharacter.hp -= cpuDamage;
@@ -221,7 +225,7 @@ function applyCpuSpell(cpuCharacter, playerCharacter) {
       'lose',
     );
     document.getElementById('battleCardP')?.classList.add('hit');
-    setTimeout(() => document.getElementById('battleCardP')?.classList.remove('hit'), 600);
+    setTimeout(() => document.getElementById('battleCardP')?.classList.remove('hit'), HIT_ANIMATION_DURATION);
   }
 }
 
